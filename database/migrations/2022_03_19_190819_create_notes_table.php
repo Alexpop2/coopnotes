@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->longText('content')->nullable();
             $table->foreignIdFor(\App\Models\User::class)
-                ->unique()
                 ->constrained('users')
                 ->onDelete('cascade');
             $table->json('users_accessed');

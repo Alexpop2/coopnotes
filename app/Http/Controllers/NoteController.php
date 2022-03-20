@@ -6,8 +6,10 @@ use App\Models\Note;
 use App\Models\User;
 use App\Repositories\NoteRepository\INoteRepository;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -44,22 +46,14 @@ class NoteController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|RedirectResponse
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $note = Note::create([
+            'user_id' => Auth::user()->id,
+        ]);
+        return Redirect::route("notes.edit", $note->id);
     }
 
     /**
@@ -77,11 +71,13 @@ class NoteController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Note $note)
     {
-        //
+        return Inertia::render('Notes/Edit', [
+            'note' => $note,
+        ]);
     }
 
     /**
