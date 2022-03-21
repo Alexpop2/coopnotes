@@ -25,6 +25,7 @@ class DbNoteRepository implements INoteRepository {
     {
         return Note::query()
             ->where('user_id', $user->id)
+            ->orderByDesc('id')
             ->get();
     }
 
