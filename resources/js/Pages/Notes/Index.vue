@@ -2,11 +2,21 @@
     <AppLayout>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="flex justify-center my-3">
+                    <button
+                        @click="onAddNewNoteClick"
+                        class="rounded border-2 border-cyan-500 text-cyan-500 p-3 uppercase hover:text-white hover:bg-cyan-500 transition-all">
+                        <i class="fa-solid fa-plus"></i> Add new
+                    </button>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div
                         v-for="note in userNotes"
-                        class="p-4 bg-yellow-200 h-80 shadow-md hover:shadow-xl transition-all hover:scale-110 cursor-pointer z-0 hover:z-50 text-ellipsis overflow-hidden">
-                        {{ note.content }}
+                        @click="onNoteClick(note)"
+                        class="p-4 bg-yellow-200 h-80 shadow-md hover:shadow-xl transition-all hover:scale-110 cursor-pointer z-0 hover:z-50">
+                        <div class="text-ellipsis overflow-hidden">
+                            {{ note.content }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,6 +38,15 @@ export default defineComponent({
 
     props: {
         userNotes: Array,
+    },
+
+    methods: {
+        onNoteClick(note) {
+            this.$inertia.visit(this.route('notes.edit', note.id));
+        },
+        onAddNewNoteClick() {
+            this.$inertia.visit(this.route('notes.create'));
+        }
     }
 })
 </script>
