@@ -1,13 +1,13 @@
 <template>
     <AppLayout>
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center my-3">
-                    <button
+                    <Button
                         @click="onAddNewNoteClick"
-                        class="rounded border-2 border-cyan-500 text-cyan-500 p-3 uppercase hover:text-white hover:bg-cyan-500 transition-all">
+                    >
                         <i class="fa-solid fa-plus"></i> Add new
-                    </button>
+                    </Button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div
@@ -28,12 +28,14 @@
 import { defineComponent } from 'vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import AppLayout from "../../Layouts/AppLayout";
+import Button from "../../Components/Button";
 
 export default defineComponent({
     components: {
         AppLayout,
         Head,
         Link,
+        Button,
     },
 
     props: {
