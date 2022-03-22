@@ -29,9 +29,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::resource('notes', \App\Http\Controllers\NoteController::class)->except([
-        'store'
+    Route::resource('notes', \App\Http\Controllers\NoteController::class)->only([
+        'index', 'create'
     ]);
+
+    Route::middleware('can:view,note')->group(function () {
+        Route::resource('notes', \App\Http\Controllers\NoteController::class)->except([
+            'store', 'index', 'create'
+        ]);
+    });
 });
 
 
