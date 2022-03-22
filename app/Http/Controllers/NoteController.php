@@ -85,11 +85,16 @@ class NoteController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Note  $note
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $note->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'msg'    => 'Okay',
+        ], 201);
     }
 
     /**

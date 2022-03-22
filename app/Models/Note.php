@@ -17,6 +17,7 @@ class Note extends Model
     protected $fillable = [
         'user_id',
         'users_accessed',
+        'content',
     ];
 
     protected $attributes = [

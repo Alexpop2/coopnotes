@@ -14,7 +14,7 @@
                         v-for="note in userNotes"
                         @click="onNoteClick(note)"
                         class="p-4 bg-yellow-200 h-80 shadow-md hover:shadow-xl transition-all hover:scale-110 cursor-pointer z-0 hover:z-50">
-                        <div class="text-ellipsis overflow-hidden">
+                        <div class="text-ellipsis overflow-hidden whitespace-pre-wrap h-full">
                             {{ note.content }}
                         </div>
                     </div>

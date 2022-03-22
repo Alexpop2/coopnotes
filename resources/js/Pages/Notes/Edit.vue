@@ -49,20 +49,28 @@
                             :disabled="savingProcessing"
                         >
                             <i
-                                :class="{'!hidden': !savingProcessing}"
-                                class="fa-solid fa-circle-notch animate-spin"
+                                :class="{
+                                    '!hidden': !savingProcessing && !savedState,
+                                    'fa-circle-notch': savingProcessing,
+                                    'animate-spin': savingProcessing,
+                                    'fa-circle-check': savedState
+                                }"
+                                class="fa-solid"
                             />
                             {{ saveButtonText }}
                         </Button>
                     </div>
                 </div>
                 <div
-                    @click="onNoteClick($event.target)"
+                    @click="onNoteClick"
                     class="p-4 bg-yellow-200 min-h-screen shadow-md cursor-text"
                 >
                     <textarea
                         @input="onInput($event.target)"
-                        class="w-full h-full border-0 bg-transparent shadow-transparent overflow-y-hidden" id="content">{{ note.content }}</textarea>
+                        ref="textAreaBlock"
+                        v-model="note.content"
+                        class="w-full h-full border-0 bg-transparent shadow-transparent overflow-y-hidden" id="content">
+                    </textarea>
                 </div>
             </div>
         </div>
@@ -76,6 +84,7 @@ import AppLayout from "../../Layouts/AppLayout";
 import Button from "../../Components/Button";
 import Modal from "../../Jetstream/Modal";
 import DangerButton from "../../Components/DangerButton";
+import axios from "axios";
 
 export default defineComponent({
     components: {
@@ -95,12 +104,15 @@ export default defineComponent({
         return {
             optionsOpened: false,
             savingProcessing: false,
+            savedState: false,
+            textAreaBlock: null,
+            savedStatedTimeout: null,
         };
     },
 
     computed: {
         saveButtonText() {
-            return this.savingProcessing ? 'Saving' : 'Save';
+            return this.savedState ? 'Saved' : this.savingProcessing ? 'Saving' : 'Save';
         }
     },
 
@@ -111,16 +123,37 @@ export default defineComponent({
         onOptionsClick() {
             this.optionsOpened = true;
         },
-        onInput(element) {
-            element.style.height = "auto";
-            element.style.height = (element.scrollHeight) + "px";
+        onInput() {
+            this.$refs['textAreaBlock'].style.height = "auto";
+            this.$refs['textAreaBlock'].style.height = (this.$refs['textAreaBlock'].scrollHeight) + "px";
         },
-        onNoteClick(element) {
-            element.querySelector('textarea').focus();
+        onNoteClick() {
+            this.$refs['textAreaBlock'].focus();
         },
         onSaveClick() {
+            clearTimeout(this.savedStatedTimeout);
             this.savingProcessing = true;
+            this.savedState = false;
+            axios.put(route('notes.update', this.note.id),{content: this.note.content})
+                .then((el) => {
+                    if(el.data.status === 'success') {
+                        this.savingProcessing = false;
+                        this.savedState = true;
+                        this.savedStatedTimeout = setTimeout(() => {
+                            this.savedState = false;
+                        },5000);
+                        this.page.updated_at = el.data.updated_at;
+                    }
+                })
+                .catch((er) => {
+                })
+                .then(() => {
+                });
         }
+    },
+
+    mounted() {
+        this.onInput();
     }
 })
 </script>
