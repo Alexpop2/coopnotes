@@ -46,7 +46,7 @@
                         </Button>
                         <Button
                             @click="onSaveClick"
-                            :disabled="savingProcessing"
+                            :disabled="savingProcessing || errorState"
                         >
                             <i
                                 :class="{
@@ -105,6 +105,7 @@ export default defineComponent({
             optionsOpened: false,
             savingProcessing: false,
             savedState: false,
+            errorState: false,
             textAreaBlock: null,
             savedStatedTimeout: null,
         };
@@ -112,7 +113,7 @@ export default defineComponent({
 
     computed: {
         saveButtonText() {
-            return this.savedState ? 'Saved' : this.savingProcessing ? 'Saving' : 'Save';
+            return this.errorState ? 'Error' : this.savedState ? 'Saved' : this.savingProcessing ? 'Saving' : 'Save';
         }
     },
 
@@ -142,10 +143,12 @@ export default defineComponent({
                         this.savedStatedTimeout = setTimeout(() => {
                             this.savedState = false;
                         },5000);
-                        this.page.updated_at = el.data.updated_at;
                     }
                 })
                 .catch((er) => {
+                    this.savingProcessing = false;
+                    this.savedState = false;
+                    this.errorState = true;
                 })
                 .then(() => {
                 });
