@@ -31,7 +31,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the notes by user.
      *
      * @return Response
      */
@@ -40,11 +40,26 @@ class NoteController extends Controller
         $userNotes = $this->noteRepository->findByUser(Auth::user());
         return Inertia::render('Notes/Index', [
             'userNotes' => $userNotes,
+            'showAddButton' => true
         ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of shared notes by user.
+     *
+     * @return Response
+     */
+    public function showShared()
+    {
+        $userNotes = $this->noteRepository->findSharedByUser(Auth::user());
+        return Inertia::render('Notes/Index', [
+            'userNotes' => $userNotes,
+            'sharedMode' => true
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new note.
      *
      * @return \Illuminate\Http\Response|RedirectResponse
      */
@@ -57,7 +72,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified note.
      *
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
@@ -68,7 +83,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified note.
      *
      * @param  \App\Models\Note  $note
      * @return Response
@@ -81,7 +96,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified note in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Note  $note
@@ -98,7 +113,7 @@ class NoteController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified note from storage.
      *
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response

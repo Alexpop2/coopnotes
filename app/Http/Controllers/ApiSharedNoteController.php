@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Repositories\SharedNoteRepository\ISharedNoteRepository;
 use Illuminate\Http\Request;
 
-class SharedNoteController extends Controller
+class ApiSharedNoteController extends Controller
 {
 
     /**
@@ -82,22 +82,38 @@ class SharedNoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SharedNote  $sharedNote
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\SharedNote  $shared
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, SharedNote $sharedNote)
+    public function update(Request $request, Note $note, SharedNote $shared)
     {
-        //
+        $this->authorize('view', $shared);
+
+        if($request->approved)
+            $shared->approved = $request->approved;
+        $shared->save();
+
+        return response()->json([
+            'status' => 'success',
+            'msg'    => 'Okay',
+        ], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SharedNote  $sharedNote
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\SharedNote  $shared
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(SharedNote $sharedNote)
+    public function destroy(Note $note, SharedNote $shared)
     {
-        //
+        $this->authorize('view', $shared);
+
+        $shared->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'msg'    => 'Okay',
+        ], 201);
     }
 }

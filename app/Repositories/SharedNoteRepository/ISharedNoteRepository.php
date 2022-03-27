@@ -27,6 +27,13 @@ interface ISharedNoteRepository {
     public function findAllByUser($user);
 
     /**
+     * Get shared note for user
+     * @param $user
+     * @return mixed
+     */
+    public function findAllByUserAndNote($user, $note);
+
+    /**
      * Get shared note by ID
      * @param $id
      * @return mixed

@@ -179,6 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\NoteServiceProvider::class,
+        App\Providers\SharedNoteServiceProvider::class,
 
     ],
 

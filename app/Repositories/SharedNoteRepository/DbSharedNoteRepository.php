@@ -52,4 +52,11 @@ class DbSharedNoteRepository implements ISharedNoteRepository {
             ->first();
     }
 
+    public function findAllByUserAndNote($user, $note)
+    {
+        return SharedNote::query()
+            ->where('note_id', $note->id)
+            ->where('user_id', $user->id)
+            ->first();
+    }
 }

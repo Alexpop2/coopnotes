@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('notes', \App\Http\Controllers\NoteController::class)->only([
         'index', 'create'
     ]);
+    Route::get('/notes/shared', [\App\Http\Controllers\NoteController::class, 'showShared'])
+        ->name('notes.shared.index');
 
     Route::middleware('can:view,note')->group(function () {
         Route::resource('notes', \App\Http\Controllers\NoteController::class)->except([

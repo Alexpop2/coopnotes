@@ -58,4 +58,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function sharedNotes() {
+        return $this->hasMany(SharedNote::class,'user_id', 'id');
+    }
 }

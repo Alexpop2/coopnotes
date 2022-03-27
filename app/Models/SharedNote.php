@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SharedNote extends Model
 {
     use HasFactory;
+
+    public function note() {
+        return $this->belongsTo(Note::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -135,7 +135,7 @@ export default defineComponent({
             clearTimeout(this.savedStatedTimeout);
             this.savingProcessing = true;
             this.savedState = false;
-            axios.put(route('notes.update', this.note.id),{content: this.note.content})
+            axios.put(route('api.notes.update', this.note.id),{content: this.note.content})
                 .then((el) => {
                     if(el.data.status === 'success') {
                         this.savingProcessing = false;

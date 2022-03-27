@@ -25,4 +25,11 @@ interface INoteRepository {
      * @return mixed
      */
     public function findById($id);
+
+    /**
+     * Get all shared notes by user
+     * @param $user
+     * @return mixed
+     */
+    public function findSharedByUser($user);
 }

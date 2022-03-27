@@ -18,4 +18,8 @@ class Note extends Model
         'user_id',
         'content',
     ];
+
+    public function sharedNotes() {
+        return $this->hasMany(SharedNote::class,'note_id', 'id');
+    }
 }

@@ -39,4 +39,18 @@ class DbNoteRepository implements INoteRepository {
             ->where('id', $id)
             ->first();
     }
+
+    /**
+     * @param $user
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function findSharedByUser($user)
+    {
+        return Note::query()
+            ->select('notes.*','shared_notes.approved', 'shared_notes.id AS shared_id')
+            ->join('shared_notes', 'notes.id', '=', 'shared_notes.note_id')
+            ->where('shared_notes.user_id', $user->id)
+            ->orderByDesc('notes.id')
+            ->get();
+    }
 }
