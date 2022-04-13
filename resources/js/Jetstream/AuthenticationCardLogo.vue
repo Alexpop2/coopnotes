@@ -1,9 +1,6 @@
 <template>
     <Link :href="'/'">
-        <svg class="w-16 h-16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5"/>
-            <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5"/>
-        </svg>
+        <svg class="w-16 h-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 238.39 238.39"><g id="Layer_2" data-name="Layer 2"><rect x="0.5" y="0.5" width="237.39" height="237.39" rx="5.67" fill="#fff089" stroke="#000" stroke-miterlimit="10"/><line x1="23.47" y1="20.94" x2="214.91" y2="20.94" fill="none" stroke="#000" stroke-miterlimit="10"/><line x1="23.47" y1="223.19" x2="214.91" y2="223.19" fill="none" stroke="#000" stroke-miterlimit="10"/><line x1="23.47" y1="41.55" x2="214.91" y2="41.55" fill="none" stroke="#000" stroke-miterlimit="10"/><line x1="23.47" y1="59.35" x2="214.91" y2="59.35" fill="none" stroke="#000" stroke-miterlimit="10"/><line x1="23.47" y1="79.96" x2="214.91" y2="79.96" fill="none" stroke="#000" stroke-miterlimit="10"/></g><g id="Layer_3" data-name="Layer 3"><text transform="translate(59.94 132.2)" font-size="48" font-family="MyriadPro-Regular, Myriad Pro"><tspan letter-spacing="-0.02em">C</tspan><tspan x="26.83" y="0">OOP</tspan><tspan x="-8.04" y="57.6">N</tspan><tspan x="23.54" y="57.6" letter-spacing="-0.02em">O</tspan><tspan x="55.42" y="57.6" letter-spacing="0em">TES</tspan></text></g></svg>
     </Link>
 </template>
 
