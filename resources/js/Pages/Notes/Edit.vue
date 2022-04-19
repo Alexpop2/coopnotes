@@ -6,26 +6,10 @@
             :show="optionsOpened"
             @close="optionsOpened = null"
         >
-            <div class="w-full p-3 text-right text-2xl">
-                <i
-                    @click="optionsOpened = null"
-                    class="fa-solid fa-xmark text-gray-500 cursor-pointer"
-                />
-            </div>
-            <div class="w-full p-3">
-                <div class="flex justify-center space-x-4">
-                    <Button
-                        @click="optionsOpened = null"
-                    >
-                        Users accessed
-                    </Button>
-                    <DangerButton
-                        @click="optionsOpened = null"
-                    >
-                        Delete
-                    </DangerButton>
-                </div>
-            </div>
+            <Options
+                :optionsOpened="optionsOpened"
+                @close="optionsOpened = null"
+            />
         </Modal>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -85,9 +69,11 @@ import Button from "../../Components/Button";
 import Modal from "../../Jetstream/Modal";
 import DangerButton from "../../Components/DangerButton";
 import axios from "axios";
+import Options from "@/Pages/Notes/Options/Options";
 
 export default defineComponent({
     components: {
+        Options,
         DangerButton,
         Modal,
         Button,
@@ -103,6 +89,7 @@ export default defineComponent({
     data: function() {
         return {
             optionsOpened: false,
+            usersAccessedOpened: false,
             savingProcessing: false,
             savedState: false,
             errorState: false,
@@ -123,6 +110,9 @@ export default defineComponent({
         },
         onOptionsClick() {
             this.optionsOpened = true;
+        },
+        onUsersAccessedClick() {
+            this.usersAccessedOpened = true;
         },
         onInput() {
             this.$refs['textAreaBlock'].style.height = "auto";
