@@ -38,11 +38,21 @@ class ApiSharedNoteController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Note $note, User $user)
     {
-        //
+        $this->authorize('view', $note);
+
+        $sharedNote = SharedNote::create([
+            'user_id' => $user->id,
+            'note_id' => $note->id
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'msg'    => 'Okay',
+        ], 201);
     }
 
     /**
@@ -115,5 +125,11 @@ class ApiSharedNoteController extends Controller
             'status' => 'success',
             'msg'    => 'Okay',
         ], 201);
+    }
+
+    public function destroyByNoteAndUser(Note $note, User $user)
+    {
+        $shared = $this->sharedNoteRepository->findAllByUserAndNote($user,$note);
+        $this->destroy($note, $shared);
     }
 }

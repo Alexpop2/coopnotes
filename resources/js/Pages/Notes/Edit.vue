@@ -9,6 +9,7 @@
             <Options
                 :optionsOpened="optionsOpened"
                 @close="optionsOpened = null"
+                :note="note"
             />
         </Modal>
         <div class="py-6">

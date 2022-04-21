@@ -9,6 +9,16 @@ class SharedNote extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'user_id',
+        'note_id',
+    ];
+
     public function note() {
         return $this->belongsTo(Note::class);
     }

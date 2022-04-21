@@ -15,6 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/users/{search?}',[\App\Http\Controllers\ApiUserController::class, 'showBySearch'])
+        ->name('api.users.search');
+
+    Route::get('/notes/{note}/users', [\App\Http\Controllers\ApiUserController::class, 'showBySharedNote'])
+        ->name('api.notes.accessed_users');
+    Route::delete(
+        '/notes/{note}/users/{user}',
+        [\App\Http\Controllers\ApiSharedNoteController::class, 'destroyByNoteAndUser']
+    )
+        ->name('api.notes.accessed_users.destroy');
+    Route::post(
+        '/notes/{note}/users/{user}',
+        [\App\Http\Controllers\ApiSharedNoteController::class, 'store']
+    )
+        ->name('api.notes.accessed_users.store');
+
     Route::get('/notes/shared', [\App\Http\Controllers\ApiNoteController::class, 'showShared'])
         ->name('api.notes.shared.index');
     Route::apiResource("notes",\App\Http\Controllers\ApiNoteController::class)->names([

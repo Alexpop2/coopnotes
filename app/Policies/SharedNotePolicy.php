@@ -32,7 +32,7 @@ class SharedNotePolicy
      */
     public function view(User $user, SharedNote $sharedNote)
     {
-        return $sharedNote->user_id === $user->id
+        return $sharedNote->user_id === $user->id || $sharedNote->note->user_id === $user->id
             ? Response::allow()
             : Response::deny('You don\'t have permission to open this');
     }

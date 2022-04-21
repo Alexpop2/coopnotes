@@ -17,6 +17,7 @@
             />
             <OptionsUsersAccessed
                 v-if="page === 'usersAccessed'"
+                :note="note"
             />
         </TransitionGroup>
     </div>
@@ -34,7 +35,8 @@ export default defineComponent({
         OptionsMain
     },
     props: {
-        optionsOpened: Boolean
+        optionsOpened: Boolean,
+        note: Object
     },
     data: function () {
         return {

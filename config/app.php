@@ -180,6 +180,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\NoteServiceProvider::class,
         App\Providers\SharedNoteServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
 
     ],
 
