@@ -31,7 +31,7 @@ class NotePolicy
     public function view(User $user, Note $note)
     {
         $sharedNote = $this->sharedNoteRepository->findAllByUserAndNote($user,$note);
-        return ($note->user_id === $user->id) || ($sharedNote->user_id === $user->id)
+        return ($note->user_id === $user->id) || (!empty($sharedNote) && $sharedNote->user_id === $user->id)
             ? Response::allow()
             : Response::deny('You don\'t have permission to open this');
     }
