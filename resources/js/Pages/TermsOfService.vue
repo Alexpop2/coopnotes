@@ -1,5 +1,5 @@
 <template>
-    <Head title="Terms of Service" />
+    <AppHead title="Terms of Service" />
 
     <div class="font-sans text-gray-900 antialiased">
         <div class="pt-4 bg-gray-100">
@@ -19,11 +19,13 @@
 import { defineComponent } from 'vue'
 import { Head } from '@inertiajs/inertia-vue3';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
+import AppHead from "@/Components/AppHead.vue";
 
 export default defineComponent({
     props: ['terms'],
 
     components: {
+        AppHead,
         Head,
         JetAuthenticationCardLogo,
     },

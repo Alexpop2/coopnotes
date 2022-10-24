@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Head :title="title" />
+        <AppHead :title="title" />
 
         <jet-banner />
 
@@ -248,6 +248,7 @@
     import JetNavLink from '@/Jetstream/NavLink.vue'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import AppHead from "@/Components/AppHead.vue";
 
     export default defineComponent({
         props: {
@@ -255,6 +256,7 @@
         },
 
         components: {
+            AppHead,
             Head,
             JetApplicationMark,
             JetBanner,

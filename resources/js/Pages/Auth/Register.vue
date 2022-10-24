@@ -1,5 +1,5 @@
 <template>
-    <Head title="Register" />
+    <AppHead title="Register" />
 
     <jet-authentication-card>
         <template #logo>
@@ -64,9 +64,11 @@
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import AppHead from "@/Components/AppHead.vue";
 
     export default defineComponent({
         components: {
+            AppHead,
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,

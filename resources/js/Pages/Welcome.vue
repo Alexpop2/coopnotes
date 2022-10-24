@@ -1,5 +1,5 @@
 <template>
-    <Head title="Welcome" />
+    <AppHead title="Welcome" />
 
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -112,9 +112,11 @@
     import { defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
     import Button from "@/Components/Button";
+    import AppHead from "@/Components/AppHead.vue";
 
     export default defineComponent({
         components: {
+            AppHead,
             Button,
             Head,
             Link,

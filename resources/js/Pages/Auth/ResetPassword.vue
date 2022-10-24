@@ -1,5 +1,5 @@
 <template>
-    <Head title="Reset Password" />
+    <AppHead title="Reset Password" />
 
     <jet-authentication-card>
         <template #logo>
@@ -42,9 +42,11 @@
     import JetInput from '@/Jetstream/Input.vue'
     import JetLabel from '@/Jetstream/Label.vue'
     import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
+    import AppHead from "@/Components/AppHead.vue";
 
     export default defineComponent({
         components: {
+            AppHead,
             Head,
             JetAuthenticationCard,
             JetAuthenticationCardLogo,
