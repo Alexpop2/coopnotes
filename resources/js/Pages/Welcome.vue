@@ -33,6 +33,12 @@
                 >
                     Login
                 </Button>
+                <Button
+                    @click="onRegisterClick"
+                    class="ml-4"
+                >
+                    Register
+                </Button>
             </div>
         </div>
     </div>
@@ -124,6 +130,9 @@
         methods: {
             onLoginClick() {
                 this.$inertia.visit(this.route('login'));
+            },
+            onRegisterClick() {
+                this.$inertia.visit(this.route('register'));
             },
         }
     })
